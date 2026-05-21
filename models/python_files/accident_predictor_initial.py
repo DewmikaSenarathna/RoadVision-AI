@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Accident_Predictor_initial.ipynb
+"""Accident_Predictor_final.ipynb
 
 **Install libraries**
 """
@@ -314,55 +314,44 @@ XGBoost, Random Forest, LightGBM, CatBoost, Losistic Regression, KNN, SVM, Neura
 """
 
 models = {
+
     "XGBoost": XGBClassifier(
-        n_estimators = 300,
-        learning_rate = 0.05,
-        max_depth = 8,
-        subsample = 0.8,
-        colsample_bytree = 0.8,
-        random_state = 42
+        n_estimators=300,
+        learning_rate=0.05,
+        max_depth=8,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        random_state=42
     ),
 
     "Random Forest": RandomForestClassifier(
-        n_estimators = 300,
-        max_depth = 20,
-        random_state = 42,
-        n_jobs = -1
+        n_estimators=300,
+        max_depth=20,
+        class_weight='balanced',
+        random_state=42,
+        n_jobs=2
     ),
 
-    "LightGBM" : LGBMClassifier(
-        iterations = 300,
-        learning_rate = 0.05,
-        max_depth = 8,
-        random_state = 42
+    "LightGBM": LGBMClassifier(
+        n_estimators=300,
+        learning_rate=0.05,
+        max_depth=8,
+        class_weight='balanced',
+        random_state=42
     ),
 
     "CatBoost": CatBoostClassifier(
-        iterations = 300,
-        learning_rate = 0.05,
-        depth = 8,
-        verbose = 0
+        iterations=300,
+        learning_rate=0.05,
+        depth=8,
+        auto_class_weights='Balanced',
+        verbose=0
     ),
 
-    "Logistic Regression" : LogisticRegression(
-        max_iter = 1000
-    ),
-
-    "KNN" : KNeighborsClassifier(
-        n_neighbors = 7
-    ),
-
-    "SVM" : SVC(
-        kernel = 'rbf'
-    ),
-
-    "Neural Network": MLPClassifier(
-        hidden_layer_sizes = (128, 64),
-        max_iter = 200,
-        random_state = 42
+    "Logistic Regression": LogisticRegression(
+        max_iter=1000,
+        class_weight='balanced'
     )
-
-
 }
 
 """**Evalution Metrics**"""
@@ -382,27 +371,13 @@ for name, model in models.items():
 
     print(f"\nTraining {name}")
 
-    pipeline = ImbPipeline([
-
-        ('smote',
-         SMOTE(random_state=42)),
-
-        ('model',
-         model)
-
-    ])
-
     scores = cross_validate(
-
-        pipeline,
+        model,
         X,
         y,
-
-        cv=cv,
-
+        cv=3,
         scoring=scoring,
-
-        n_jobs=-1
+        n_jobs=2
     )
 
     results.append({
@@ -410,24 +385,99 @@ for name, model in models.items():
         'Model': name,
 
         'Accuracy':
-            scores[
-                'test_accuracy'
-            ].mean(),
+            scores['test_accuracy'].mean(),
 
         'Precision':
-            scores[
-                'test_precision'
-            ].mean(),
+            scores['test_precision'].mean(),
 
         'Recall':
-            scores[
-                'test_recall'
-            ].mean(),
+            scores['test_recall'].mean(),
 
         'F1 Score':
-            scores[
-                'test_f1'
-            ].mean()
+            scores['test_f1'].mean()
+    })
+
+models = {
+
+    "XGBoost": XGBClassifier(
+        n_estimators=300,
+        learning_rate=0.05,
+        max_depth=8,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        random_state=42
+    ),
+
+    "Random Forest": RandomForestClassifier(
+        n_estimators=200,
+        max_depth=20,
+        class_weight='balanced',
+        random_state=42,
+        n_jobs=2
+    ),
+
+    "LightGBM": LGBMClassifier(
+        n_estimators=300,
+        learning_rate=0.05,
+        max_depth=8,
+        class_weight='balanced',
+        random_state=42
+    ),
+
+    "CatBoost": CatBoostClassifier(
+        iterations=300,
+        learning_rate=0.05,
+        depth=8,
+        auto_class_weights='Balanced',
+        verbose=0
+    ),
+
+    "Logistic Regression": LogisticRegression(
+        max_iter=1000,
+        class_weight='balanced'
+    )
+}
+
+results = []
+
+for name, model in models.items():
+
+    print("=" * 60)
+    print(f"Training {name}")
+    print("=" * 60)
+
+    scores = cross_validate(
+        model,
+        X,
+        y,
+        cv=3,
+        scoring=scoring,
+        n_jobs=2
+    )
+
+    accuracy = scores['test_accuracy'].mean()
+    precision = scores['test_precision'].mean()
+    recall = scores['test_recall'].mean()
+    f1 = scores['test_f1'].mean()
+
+    accuracy_std = scores['test_accuracy'].std()
+    precision_std = scores['test_precision'].std()
+    recall_std = scores['test_recall'].std()
+    f1_std = scores['test_f1'].std()
+
+    print(f"Accuracy  : {accuracy:.4f} ± {accuracy_std:.4f}")
+    print(f"Precision : {precision:.4f} ± {precision_std:.4f}")
+    print(f"Recall    : {recall:.4f} ± {recall_std:.4f}")
+    print(f"F1 Score  : {f1:.4f} ± {f1_std:.4f}")
+
+    results.append({
+
+        'Model': name,
+
+        'Accuracy': accuracy,
+        'Precision': precision,
+        'Recall': recall,
+        'F1 Score': f1
     })
 
 """**Compare Results**"""
@@ -440,3 +490,4 @@ results_df = results_df.sort_values(
 )
 
 print(results_df)
+
