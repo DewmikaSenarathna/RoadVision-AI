@@ -148,7 +148,7 @@ The browser-based interface provides:
 
 ## Mobile Layer
 
-A Flutter application scaffold is included for future Android and iOS deployment.
+A Flutter-based mobile application is included to provide RoadVisionAI functionality on Android devices, with future support planned for iOS deployment.
 
 ---
 
@@ -199,28 +199,6 @@ Install dependencies:
 
 ```bash
 pip install -r requirements.txt
-```
-
----
-
-## Environment Configuration
-
-Create a local environment file:
-
-```bash
-cp .env.example .env
-```
-
-Configure the following variables:
-
-```env
-ROADVISIONAI_API_KEY=
-
-ROADVISIONAI_CORS_ORIGINS=
-
-ROADVISIONAI_WEATHER_API_BASE_URL=
-
-ROADVISIONAI_WEATHER_API_KEY=
 ```
 
 ---
