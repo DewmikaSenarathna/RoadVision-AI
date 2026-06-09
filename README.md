@@ -7,7 +7,7 @@
 
 ## 📌 Overview
 
-**RoadVision AI** is a next-generation, web-based platform designed to **predict road accident risk before a journey begins**. By combining **artificial intelligence**, **public road accident data**, **weather intelligence**, and **geospatial analysis**, the system identifies high-risk road segments and travel conditions and presents them through an interactive map-based interface.
+**RoadVision AI** is a next-generation, mobile app & web-based platform designed to **predict road accident risk before a journey begins**. By combining **artificial intelligence**, **public road accident data**, **weather intelligence**, and **geospatial analysis**, the system identifies high-risk road segments and travel conditions and presents them through an interactive location-based interface.
 
 Unlike traditional reactive road safety systems, RoadVision AI focuses on **prediction and prevention**, enabling data-driven awareness and safer route decision-making. The platform is fully **software-based**, requiring **no physical sensors or hardware**, making it scalable, cost-effective, and easy to deploy.
 
@@ -40,7 +40,7 @@ RoadVision AI analyzes multiple data dimensions to estimate accident risk:
 A machine learning model processes these inputs to generate:
 - A **risk score**
 - A **risk category** (Low / Medium / High)
-- A **visual risk representation** on a web-based map
+- A **visual risk representation** on a location based interface
 
 ---
 <br>
@@ -72,12 +72,12 @@ A machine learning model processes these inputs to generate:
 
 ### Frontend
 - HTML, CSS, JavaScript
-- Leaflet.js (Maps)
+- Leaflet.js
 - OpenStreetMap
 
 ### External Data Sources
 - Public road accident datasets
-- Weather APIs (e.g., OpenWeatherMap)
+- Weather APIs 
 
 ---
 <br>
@@ -85,34 +85,19 @@ A machine learning model processes these inputs to generate:
 ## 🗂️ Project Structure
 
 ```text
-don-dew-roadvision-ai/
+RoadVision-AI/
 │
-├── data/          # Raw and processed datasets
-├── notebooks/     # Data analysis & model training notebooks
-├── model/         # Trained machine learning models
-├── backend/       # API services and prediction logic
-├── frontend/      # Web user interface
-├── docs/          # Diagrams, reports, documentation
+├── data/                     # Raw and processed datasets
+├── data_preprocessing/       # Data preprocessing parts
+├── feature_selection/        # Feature selection parts
+├── mobile_app/               # Flutter based mobile app development
+├── models/                   # Trained machine learning models
+├── notebooks/                # Data analysis & model training notebooks
+├── results/                  # Final results 
+├── docs/                     # Diagrams, reports, documentation
 ├── README.md
 └── .gitignore
 ```
----
-<br>
-
-## 🚧 Project Status
-
-🔄 **In Development**
-
-### Current Phase
-- Data collection and exploration  
-- Feature engineering  
-- Initial machine learning model prototyping  
-
-### Upcoming
-- Backend API integration  
-- Frontend map-based visualization  
-- End-to-end system deployment  
-
 ---
 <br>
 
@@ -131,8 +116,7 @@ don-dew-roadvision-ai/
 - Route-to-route accident risk comparison  
 - Real-time traffic data integration  
 - Explainable AI to highlight key risk factors  
-- Multi-city and multi-country expansion  
-- Mobile-friendly and responsive user interface  
+- Multi-city and multi-country expansion   
 
 ---
 <br>
@@ -141,7 +125,7 @@ don-dew-roadvision-ai/
 
 **Don Dew**  
 Computer Engineering Undergraduate  
-AI | Web Systems | Intelligent Applications  
+AI | Intelligent Applications | Web Systems
 
 ---
 <br>
