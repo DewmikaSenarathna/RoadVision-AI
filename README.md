@@ -1,6 +1,12 @@
-# 🚦 RoadVision AI  
-### Intelligent Road Accident Risk Prediction Platform  
-**by Don Dew**
+<p align="center">
+  <img src="mobile_app/mobile_app/assets/Logo.png" width="180" alt="RoadVisionAI Logo">
+</p>
+
+<h1 align="center">RoadVision AI</h1>
+
+<p align="center">
+  <strong>Intelligent Road Accident Risk Prediction Platform</strong><br>
+</p>
 
 ---
 <br>
